@@ -91,6 +91,6 @@ MIT
 
 ## ⚠️ Misusage
 
-## 🚀 Gotchas
+## 🤯 Gotchas
 
 ## 📜 Licence
