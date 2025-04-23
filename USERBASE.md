@@ -103,3 +103,17 @@ See `auth.js` for complete implementation example with:
 
 ## License
 MIT
+
+## 👀 Description
+
+## 💾 Installation
+
+## 🧰 Methods
+
+## ✅ Usage
+
+## ⚠️ Misusage
+
+## 🤯 Gotchas
+
+## 📜 Licence
