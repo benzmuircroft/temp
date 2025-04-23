@@ -52,3 +52,17 @@ All functions:
 
 ## License
 MIT
+
+## 👀 Description
+
+## 💾 Installation
+
+## 🧰 Methods
+
+## ✅ Usage
+
+## ⚠️ Misusage
+
+## 🤯 Gotchas
+
+## 📜 Licence
