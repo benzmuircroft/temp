@@ -102,3 +102,17 @@ The CRDT automatically:
 
 ## License
 MIT
+
+## 👀 Description
+
+## 💾 Installation
+
+## 🧰 Methods
+
+## ✅ Usage
+
+## ⚠️ Misusage
+
+## 🤯 Gotchas
+
+## 📜 Licence
