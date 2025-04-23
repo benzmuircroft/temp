@@ -41,3 +41,17 @@ To modify any of the forked modules:
 ## License
 
 MIT © Benz Muircroft
+
+## 👀 Description
+
+## 💾 Installation
+
+## 🧰 Methods
+
+## ✅ Usage
+
+## ⚠️ Misusage
+
+## 🤯 Gotchas
+
+## 📜 Licence
