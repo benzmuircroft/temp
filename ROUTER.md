@@ -1,4 +1,4 @@
-# @ypear/router
+# 🌐 @ypear/router
 
 todo: redo this
 
@@ -80,3 +80,7 @@ await router.propagate('update', {
 
 ## License
 MIT
+
+## 😎 Gotchas
+
+## ⚠️ Misusage
