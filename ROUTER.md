@@ -81,6 +81,16 @@ await router.propagate('update', {
 ## License
 MIT
 
-## 😎 Gotchas
+## 👀 Description
+
+## 💾 Installation
+
+## 🧰 Methods
+
+## ✅ Usage
 
 ## ⚠️ Misusage
+
+## 🚀 Gotchas
+
+## 📜 Licence
