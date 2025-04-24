@@ -74,19 +74,21 @@ await toPeer(publicKey, dataObject);
 todo.
 
 ## 🤯 Gotchas
-- The userbase takes a router that has not been started
+- The `userbase` takes a `router` that has not been `start`ed
 
-- If the router has a userbase; the router will replicate the userbase's corestore
+- If the `router` has a `userbase`; the `router` will replicate the `userbase`'s `corestore`
 
-- Propagate will send to each of your 64 which makes them propagate to there 64 and so-on and so-on but each person that receives it is tagged in the message and will not respond a second time by a hit from another peer. Each will wait until there entire group has responded/dropped-out/timesout to reply and this will cascade back to you like a sonar mapping a room
+- A `propagate` will send to each of your max 64 `peers`, which makes them `propagate` to there 64 and so-on and so-on, but, each peer that receives it is `tag`ged in the message and will not respond a second time by a hit from another peer. Each will wait until their entire `tag` has responded/dropped-out/timesout and this will cascade back to you - like a sonar, mapping a room
 
-- Each database or crdt must be on it's own unique topic. You can use it without userbase, but, you will need to start it with seed and username on your own (think of this as 'unprovable-mode')
+- Doing a `broacast` is like doing a `propagate` as a bachground process and continuing
 
-- Each crdt/database added to the router, alter the routers opions.cache, therefore adding themselves to the router as topics
+- Each `database` or `crdt` must be on it's own unique `topic`. You can use it without `userbase`, but, you will need to `start` it with `seed` and `username` on your own (think of this as 'unprovable-mode')
 
-- A database automatically runs a crdt side-by-side under the hood; so each database will alter the routers options.cache twice ('databaseTopic' = database and 'databaseTopic-db' = crdt)
+- Each `crdt`/`database` added to the `router`, alter the `router`s `opions.cache`, therefore adding themselves to the `router` as `topic`s
 
-- Using `alow` achually lets you alow sub topics (so you can use it for many unique things) and can be used along side `deny`. In-other-words; you arn't forced to alow the topic that you `start`ed the router with
+- A `database` automatically runs a `crdt` side-by-side under the hood; so each `database` will alter the `router`s `options.cache` twice ('databaseTopic' = `database` and 'databaseTopic-db' = `crdt`)
+
+- Using `alow` achually lets you alow sub-topics (so you can use it for many unique things) and can be used along side `deny`. In-other-words; you arn't forced to alow the `topic` that you `start`ed the `router` with
 
 ## 📜 Licence
 MIT
