@@ -1,15 +1,14 @@
 # 🕳️🥊🌐 @ypear/router
 
 
-
-
-## 👀 Description
-A router runs a single Hyperswarm. It routes topics. It is modular and can support a single @ypear/userbase, multiple @ypear/database's and multiple @ypear/crdt's. This is faster than creating a new Hyperswarm in each module!
-
 ## 💾 Installation
 ```bash
 npm install @ypear/router
 ```
+
+## 👀 Description
+A router runs a single Hyperswarm. It routes topics. It is modular and can support a single @ypear/userbase, multiple @ypear/database's and multiple @ypear/crdt's. This is faster than creating a new Hyperswarm in each module!
+
 
 ## 🧰 Methods
 ```javascript
@@ -41,7 +40,6 @@ npm install @ypear/router
     broadcast // maybe used by userbase
   };
 ```
-
 
 ## ✅ Usage
 See usage with @ypear/userbase instead.
