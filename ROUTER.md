@@ -80,7 +80,7 @@ todo.
 
 - A `propagate` will send to each of your max 64 `peers`, which makes them `propagate` to there 64 and so-on and so-on, but, each peer that receives it is tagged in the message and will not respond a second time by a hit from another peer. Each will wait until their entire `tag` has responded/dropped-out/timesout and this will cascade back to you - like a sonar, mapping a room
 
-- Doing a `broacast` is like doing a `propagate` as a bachground process and continuing
+- Doing a `broadcast` is like doing a `propagate` as a bachground process and continuing
 
 - Each `database` or `crdt` must be on it's own unique `topic`. You can use it without `userbase`, but, you will need to `start` it with `seed` and `username` on your own (think of this as 'unprovable-mode')
 
