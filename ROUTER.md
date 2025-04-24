@@ -1,4 +1,7 @@
-# 🌐 @ypear/router
+# 🕳️🥊🌐 @ypear/router
+
+
+
 
 ## 👀 Description
 A router runs a single Hyperswarm. It routes topics. It is modular and can support a @ypear/userbase, multiple @ypear/database's and multiple @ypear/crdt's but each database/crdt must be on it's own unique topic. You can use it without userbase but, you will need to start it with seed and username on your own.
@@ -9,6 +12,35 @@ npm install @ypear/router
 ```
 
 ## 🧰 Methods
+```javascript
+{
+    swarm,
+    start,
+    get started() { return started; }, // singular for the router
+    alow,                              // enable multi event path
+    deny,                              // dissable ^^^
+    isYpearRouter: true,
+    publicKey: options.publicKey,
+    destroy: () => {                   // kill underlying streams
+      swarm.destroy();
+      peers = {};
+    },
+    get options() { return options; }, // Expose options for other modules to access
+    updateOptions: (obj) => {          // used by userbase
+      options = { ...obj, ...options }
+    },
+    updateOptionsCache: (obj) => {     // used by databse and crdt
+      if (!options.cache) options.cache = {};
+      options.cache = { ...obj, ...options.cache }
+    },
+    peers,
+    tag,
+    //
+    // todo: wtf is the difference vvv !!?
+    //
+    broadcast // maybe used by userbase
+  };
+```
 
 
 ## ✅ Usage
