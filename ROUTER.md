@@ -1,4 +1,4 @@
-# 🕳️🥊🌐 **@ypear/router**
+# 🕳️🥊🌐 @ypear/router
 
 
 ## 💾 Installation
