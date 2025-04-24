@@ -1,10 +1,7 @@
 # 🕳️🥊🌐 @ypear/router
 
-
-
-
 ## 👀 Description
-A router runs a single Hyperswarm. It routes topics. It is modular and can support a @ypear/userbase, multiple @ypear/database's and multiple @ypear/crdt's but each database/crdt must be on it's own unique topic. You can use it without userbase but, you will need to start it with seed and username on your own.
+A router runs a single Hyperswarm. It routes topics. It is modular and can support a @ypear/userbase, multiple @ypear/database's and multiple @ypear/crdt's but each database or crdt must be on it's own unique topic. You can use it without userbase but, you will need to start it with seed and username on your own.
 
 ## 💾 Installation
 ```bash
