@@ -11,6 +11,7 @@ A router runs a single Hyperswarm. It routes topics. It is modular and can suppo
 
 
 ## 🧰 Methods
+todo: format and explane
 ```javascript
 {
     swarm,
