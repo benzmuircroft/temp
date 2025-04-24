@@ -84,9 +84,9 @@ todo.
 
 - Each crdt/database added to the router, alter the routers opions.cache, therefore adding themselves to the router as topics
 
-- a database automatically runs a crdt side-by-side under the hood; so each database will alter the routers options.cache twice ('databaseTopic' = database and 'databaseTopic-db' = crdt)
+- A database automatically runs a crdt side-by-side under the hood; so each database will alter the routers options.cache twice ('databaseTopic' = database and 'databaseTopic-db' = crdt)
 
-- `alow` achually lets you alow sub topics an can be used along side `deny`. In-other-words; you arn't forced to alow the topic that you `start`ed the router with!
+- Using `alow` achually lets you alow sub topics (so you can use it for many unique things) and can be used along side `deny`. In-other-words; you arn't forced to alow the topic that you `start`ed the router with!
 
 ## 📜 Licence
 MIT
