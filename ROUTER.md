@@ -4,7 +4,7 @@
 
 
 ## 👀 Description
-A router runs a single Hyperswarm. It routes topics. It is modular and can support a @ypear/userbase, multiple @ypear/database's and multiple @ypear/crdt's. This is faster than creating a new Hyperswarm in each module!
+A router runs a single Hyperswarm. It routes topics. It is modular and can support a single @ypear/userbase, multiple @ypear/database's and multiple @ypear/crdt's. This is faster than creating a new Hyperswarm in each module!
 
 ## 💾 Installation
 ```bash
