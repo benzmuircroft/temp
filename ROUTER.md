@@ -1,96 +1,60 @@
 # 🌐 @ypear/router
 
-todo: redo this
-
-## Core Networking Architecture
-
-### 1. Connection Management
-```javascript
-initSwarm({
-  seed: Buffer,       // Network identifier
-  publicKey: String,  // Optional if seed provided
-  userbase: {         // Userbase integration
-    store: Hypercore,
-    manager: AutobaseManager,
-    onBroadcast: Function
-  },
-  cache: {            // Database integration
-    synced: Boolean,
-    peerClose: Function,
-    selfClose: Function
-  }
-})
-```
-
-### 2. Message Propagation System
-- **Tag-based Deduplication**: 5-minute expiration
-- **Delivery Guarantees**: Confirmed propagation
-- **Error Handling**: Automatic reconnection
-
-### 3. Peer Management
-- Hyperswarm discovery
-- Protomux-RPC channels
-- Graceful shutdown hooks
-
-## API Reference
-
-### `router.start(topic)`
-```javascript
-{
-  topic: String,       // 32-byte swarm topic
-  options: {
-    server: Boolean,   // Accept incoming connections
-    client: Boolean    // Make outgoing connections
-  }
-}
-```
-
-### `router.propagate(topic, data)`
-1. Generates encrypted timestamp tag
-2. Tracks peer responses
-3. Cleans up expired tags
-
-### `router.onConnection(peer)`
-Handles:
-- Stream replication
-- RPC setup
-- Error events
-
-## Integration Example
-```javascript
-// Initialize with userbase
-const router = await ypearRouter({}, {
-  seed: '0xabc...',
-  userbase: {
-    store: userbaseStore,
-    manager: autobaseManager,
-    onBroadcast: handleMessage
-  }
-});
-
-// Join network
-await router.start('my-app');
-
-// Send data
-await router.propagate('update', {
-  payload: data,
-  timestamp: Date.now()
-});
-```
-
-## License
-MIT
-
 ## 👀 Description
+A router runs a single Hyperswarm. It routes topics. It is modular and can support a @ypear/userbase, multiple @ypear/database's and multiple @ypear/crdt's but each database/crdt must be on it's own unique topic. You can use it without userbase but, you will need to start it with seed and username on your own.
 
 ## 💾 Installation
+```bash
+npm install @ypear/router
+```
 
 ## 🧰 Methods
 
-## ✅ Usage
 
+## ✅ Usage
+See usage with @ypear/userbase instead.
+```javascript
+// Initialize without userbase
+const router = await ypearRouter({}, {
+  seed: '32 hex string', // unpacks to a determinilistic keyPair (you can get this after userbase.login)
+  username: 'bob' // make up a name or got on userbase.login
+});
+
+await router.start('topic');
+
+const [
+  propagate, // wait till everyone propagates to everyone and replys done 
+  broadcast, // same as propagate but no waiting for replys (noone replys)
+  toPeers, // max 56 peers (noone replys)
+  toPeer // to one peer (does not reply)
+] = await router.alow(options.topic, async function handler(d) {
+  // messages from other peers on this topic come through here
+});
+
+// Send data
+await propagate(dataObject);
+
+await broadcast(dataObject);
+
+await toPeers(dataObject);
+
+await toPeer(publicKey, dataObject);
+```
 ## ⚠️ Misusage
+todo.
 
 ## 🤯 Gotchas
+- The userbase takes a router that has not been started.
+
+- If the router has a userbase; the router will replicate the userbase's corestore.
+
+- Propagate will send to each of your 64 which makes them propagate to there 64 and so-on and so-on but each person that receives it is tagged in the message and will not respond a second time by a hit from another peer. Each will wait until there entire group has responded/dropped-out/timesout to reply and this will cascade back to you like a sonar mapping a room.
+
+- Each crdt/database added to the router, alter the routers opions.cache, therefore adding themselves to the router as topics
+
+- a database automatically runs a crdt side-by-side under the hood; so each database will alter the routers options.cache twice ('databaseTopic' = database and 'databaseTopic-db' = crdt)
+
+- `alow` achually lets you alow sub topics an can be used along side `deny`. In-other-words; you arn't forced to alow the topic that you `start`ed the router with!
 
 ## 📜 Licence
+MIT
