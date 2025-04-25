@@ -63,7 +63,6 @@ sign
 ```
 
 ## ✅ Usage
-See usage with @ypear/userbase instead.
 ```javascript
 (async () => {
 
@@ -108,7 +107,7 @@ See usage with @ypear/userbase instead.
          loading.more();
       },
       onData: async function(change, data) { 
-         if (loading.outcome == 'done') {
+         if (loading.outcome == 'done'/* && is.options.filters.includes(change)*/) {
             // users could detect maintenance on/off for users that may have roles
             console.log('tester got some data:', data, 'on change:', change);
          }
