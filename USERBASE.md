@@ -270,5 +270,9 @@ todo.
 
 - The `router` will automatically replicate the `userbase`'s `corestore`
 
+- `is.put`/`is.got` are for updating your profile and `is.pub`/`is.sub` is for data that is not in your profile but will be indexed by your profile so that other users can find it 
+
+- `userbase` will update all subscribed users on any `userbase.put` if `dataEvent` is true. To subscribe to a prfile put; run `is.options.filters = ['username1', 'username2' ...];` after login 
+
 ## 📜 Licence
 MIT
