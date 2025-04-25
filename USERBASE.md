@@ -1,4 +1,4 @@
-# <img src="https://github.com/benzmuircroft/temp/blob/main/Yjs.png" height="20" />🍐😀 @ypear/userbase
+# <img src="https://github.com/benzmuircroft/temp/blob/main/Yjs.png" height="35"/>🍐😀 @ypear/userbase
 
 
 ## 💾 Installation
