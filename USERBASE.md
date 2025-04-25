@@ -35,15 +35,12 @@ botDelete
 ```
 After login:
 ```javascript
+isYpearUserbase: true,
 username,
 success: 'success',
 self: profile,
-peer: async function(peername) {
-   return await ub.lookup(peername);
-},
-showPub: function(publicKey) {
-   return aes.de(publicKey).slice(0, 64);
-},
+peer,
+showPub,
 call,
 keyPair,
 secret,
