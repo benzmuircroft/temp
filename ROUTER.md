@@ -11,7 +11,6 @@ A router runs a single Hyperswarm. It routes topics. It is modular and can suppo
 
 
 ## 🧰 Methods
-todo: format and explane
 ```javascript
 {
     swarm,
@@ -45,31 +44,37 @@ todo: format and explane
 ## ✅ Usage
 See usage with @ypear/userbase instead.
 ```javascript
-// Initialize without userbase
-const router = await ypearRouter({}, {
-  seed: '32 hex string', // unpacks to a determinilistic keyPair (you can get this after userbase.login)
-  username: 'bob' // make up a name or got on userbase.login
-});
+(async () => {
 
-await router.start('topic');
-
-const [
-  propagate, // wait till everyone propagates to everyone and replys done 
-  broadcast, // same as propagate but no waiting for replys (noone replys)
-  toPeers, // max 56 peers (noone replys)
-  toPeer // to one peer (does not reply)
-] = await router.alow(options.topic, async function handler(d) {
-  // messages from other peers on this topic come through here
-});
+  const topic = 'test123';
+  // Initialize without userbase
+  const router = await require('@ypear/router')({}, {
+    seed: 'a788bbf9fe2a420ad2703cabc9efc9e1', // hex 32. unpacks to a determinilistic keyPair (you can get this after userbase.login)
+    username: 'bob' // make up a name or got on userbase.login
+  });
+  
+  await router.start(topic);
+  
+  const [
+    propagate, // wait till everyone propagates to everyone and replys done 
+    broadcast, // same as propagate but no waiting for replys (noone replys)
+    toPeers, // max 56 peers (noone replys)
+    toPeer // to one peer (does not reply)
+  ] = await router.alow(topic, async function handler(d) {
+    // messages from other peers on this topic come through here
+  });
 
 // Send data
+const dataObject = { message: 'hello' };
+
 await propagate(dataObject);
 
 await broadcast(dataObject);
 
 await toPeers(dataObject);
 
-await toPeer(publicKey, dataObject);
+await toPeer(router.publicKey, dataObject); // publicKey is from your seed
+})();
 ```
 ## ⚠️ Misusage
 todo.
