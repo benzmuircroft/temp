@@ -550,4 +550,14 @@ MIT
 
 
 # todo:
-let put use pub or take away onData
+
+- let put use pub and take away onData
+
+- change metions of password to pin
+
+- reduce the api with a proxy
+
+- take away the DHT call beacuse the router has that and it will speed up loading by 50%
+
+- transfur ko to the router for security
+ 
