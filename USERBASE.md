@@ -553,7 +553,7 @@ MIT
 
 - let put use pub and take away onData
 
-- change metions of password to pin
+- change mentions of password to pin
 
 - reduce the api with a proxy
 
