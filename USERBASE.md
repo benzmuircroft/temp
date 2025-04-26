@@ -28,7 +28,9 @@ An autobase converted into a invite only registration, login and recovery system
 
 
 ## ✅ Usage
-To test userbase and get used to the concept we are going to simulate multiple users on seperate devices in this folder structure:
+To test userbase and get used to the concept we are going to simulate multiple users on seperate devices
+
+This test will be in this folder structure:
 ![image](https://github.com/user-attachments/assets/ae401844-9814-484f-9528-cea89f305159)
 
 ```javascript
