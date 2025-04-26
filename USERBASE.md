@@ -64,6 +64,9 @@ sign
 ```
 
 ## ✅ Usage
+To test userbase and get used to the concept we are going to simulate multiple users on seperate devices in this folder structure:
+![image](https://github.com/user-attachments/assets/ae401844-9814-484f-9528-cea89f305159)
+
 ```javascript
 const userbaseExample = module.exports = async function() {
   return new Promise(async (resolve) => {
@@ -282,7 +285,7 @@ const userbaseExample = module.exports = async function() {
 };
 
 ```
-Using the example (./1/createSeed.js):
+Using the example (./ub1/createSeed.js):
 ```javascript
 (async () => {
   const [ register, recover, login ] = await require('../userbaseExample')();
@@ -462,7 +465,7 @@ Using the example (./1/createSeed.js):
 
 })();
 ```
-Now keep the above code running and copy it as ./2/creatUser.js:
+Now keep the above code running and copy it as ./ub2/createUser.js:
 ```javascript
 (async () => {
   const [ register, recover, login ] = await require('../userbaseExample')();
