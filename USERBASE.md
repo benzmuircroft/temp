@@ -10,8 +10,6 @@ npm install @ypear/userbase
 An autobase converted into a invite only registration, login and recovery system. Each user has a profile and can publish informaton to the undelying Corestore. Users can also list each other and look to see what other users have published. Single user instance is enforced.
 
 
-## ⚠️ Misusage
-todo.
 
 ## 🤯 Gotchas
 - The `userbase` takes a `router` that has not been `started`
@@ -486,6 +484,9 @@ Now keep the above code running and copy it as ./ub2/createUser.js:
 
 })();
 ```
+
+## ⚠️ Misusage
+todo.
 
 
 ## 🧰 Methods
