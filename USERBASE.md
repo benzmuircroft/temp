@@ -55,9 +55,8 @@ const userbaseExample = module.exports = async function() {
    let router = require('@ypear/router'); // userbase will upgrade this later several times so it must be 'let'
   
    let seeSecret = false; // should be true but we have no ui here
-  
-  
-   const userbase = await require('@ypear/userbase')(router, {
+
+    const options = {
       networkName: 'myApp-example-123', // pick a unique name
       aes: { // choose your own aes key and iv for your app
          key: '581cecab27fc7724a871f9a5dc26030db03b6d9d850058c7b106497544415989', // keep same for all users!
@@ -86,7 +85,9 @@ const userbaseExample = module.exports = async function() {
       botPrevent: async function(lookup, get, sponsor) { // prevent name hogging
          return false; // see: #botPreventExample
       }
-   });
+   };
+
+   const userbase = await require('@ypear/userbase')(router, options});
   
   loading.outcome = userbase.register ? 'join': undefined; // if they need to register still
   console.log('loading outcome?', loading.outcome);
