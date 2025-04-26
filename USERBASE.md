@@ -464,7 +464,7 @@ Now keep the above code running and copy it as ./ub2/createUser.js:
     console.log('new user registering');
     console.log(await register({ referrer: 'seed', username: 'alice' }));
   }
-  else if (typeof login == 'function' && !recovery()) {                       // 2
+  else if (typeof login == 'function' && !recovery()) {                     // 2
     const username = 'alice';
     const password = 'f9d495'; // your pin generated in step one
     console.log(await login({ username, password }));
