@@ -486,9 +486,6 @@ Now keep the above code running and copy it as ./ub2/createUser.js:
 })();
 ```
 
-## ⚠️ Misusage
-todo.
-
 
 ## 🧰 Methods
 Before registration or recovery:
