@@ -484,8 +484,8 @@ Now keep the above code running and copy it as ./ub2/createUser.js:
       console.log(await login({ username, password }));
     }, 1000);
   }
-  else {                                                                    // you did something wrong in the setup script
-    throw new Error('nothing to do.');
+  else {                                                                    // derp!
+    throw new Error('you did something wrong in the setup script.');
   }
 
 })();
