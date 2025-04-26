@@ -440,10 +440,10 @@ Now keep the above code running and copy it as ./ub2/createUser.js:
   /**
    * Note: you need to load this script 4 times (the seed should still be running in another terminal)
    * 
-   * 1. with recovery false and alices seed and pins blank (as she's a new user) she will be registered!
-   * 2. with recovery false and alices seed and pins updated with the details provided in step 1 because she will login!
-   * 3. with recovery true because she is going to loose her device (her ./db folder will be deleted)
-   * 4. with recovery true because shes going to recover her account from the seed and then she will login!
+   * 1. Run with recovery false and alice's seed and pins blank (as she's a new user) she will be registered!
+   * 2. Run with recovery false and alice's seed and pins updated with the details provided in step 1 because she will login!
+   * 3. Run with recovery true because she is going to loose her device (her ./db folder will be deleted)
+   * 4. Run with recovery true because shes going to recover her account from the seed and then she will login!
    */
 
   let recovery = false;
