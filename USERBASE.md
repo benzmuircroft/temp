@@ -10,58 +10,24 @@ npm install @ypear/userbase
 An autobase converted into a invite only registration, login and recovery system. Each user has a profile and can publish informaton to the undelying Corestore. Users can also list each other and look to see what other users have published. Single user instance is enforced.
 
 
-## 🧰 Methods
-Before registration or recovery:
-```javascript
-isYpearUserbase: true,
-lookup,
-getImages,
-close: base.close,
-recover,
-nextKeyPair
-register
-```
-Before login:
-```javascript
-isYpearUserbase: true,
-lookup,
-getImages,
-close: base.close,
-recover,
-nextKeyPair
-login,
-list,
-botDelete
-```
-After login:
-```javascript
-isYpearUserbase: true,
-username,
-success: 'success',
-self: profile,
-peer,
-showPub,
-call,
-keyPair,
-secret,
-index,
-get,
-put,
-knockout,
-// hyperdown,
-options,
-aes,
-store,
-pub, // statuses
-sub, // statuses watcher
-unsub,
-swapPublisher, // to change ownership of a published item
-upgrade,
-rename,
-list,
-indexOf,
-sign
-```
+## ⚠️ Misusage
+todo.
+
+## 🤯 Gotchas
+- The `userbase` takes a `router` that has not been `started`
+
+- The `router` will automatically replicate the `userbase`'s `corestore`
+
+- The first user added to a new network must register with `referrer: 'seed', username: 'seed'`, the second must have `referrer: 'seed'`, afterwhich users may start using existing users as thier referrer
+
+- The first user can have a preset `options.seed` if you want
+
+- When testing, please remember to have at least the seed or another user online when creating a new user, otherwise the new user will not see the network
+
+- `is.put`/`is.got` are for updating your profile and `is.pub`/`is.sub` is for data that is not in your profile but will be indexed by your profile so that other users can find it 
+
+- `userbase` will update all subscribed users on any `userbase.put` if `dataEvent` is true. To subscribe to a prfile put; run `is.options.filters = ['username1', 'username2' ...];` after login
+
 
 ## ✅ Usage
 To test userbase and get used to the concept we are going to simulate multiple users on seperate devices in this folder structure:
@@ -521,23 +487,59 @@ Now keep the above code running and copy it as ./ub2/createUser.js:
 })();
 ```
 
-## ⚠️ Misusage
-todo.
 
-## 🤯 Gotchas
-- The `userbase` takes a `router` that has not been `started`
-
-- The `router` will automatically replicate the `userbase`'s `corestore`
-
-- The first user added to a new network must register with `referrer: 'seed', username: 'seed'`, the second must have `referrer: 'seed'`, afterwhich users may start using existing users as thier referrer
-
-- The first user can have a preset `options.seed` if you want
-
-- When testing, please remember to have at least the seed or another user online when creating a new user, otherwise the new user will not see the network
-
-- `is.put`/`is.got` are for updating your profile and `is.pub`/`is.sub` is for data that is not in your profile but will be indexed by your profile so that other users can find it 
-
-- `userbase` will update all subscribed users on any `userbase.put` if `dataEvent` is true. To subscribe to a prfile put; run `is.options.filters = ['username1', 'username2' ...];` after login 
+## 🧰 Methods
+Before registration or recovery:
+```javascript
+isYpearUserbase: true,
+lookup,
+getImages,
+close: base.close,
+recover,
+nextKeyPair
+register
+```
+Before login:
+```javascript
+isYpearUserbase: true,
+lookup,
+getImages,
+close: base.close,
+recover,
+nextKeyPair
+login,
+list,
+botDelete
+```
+After login:
+```javascript
+isYpearUserbase: true,
+username,
+success: 'success',
+self: profile,
+peer,
+showPub,
+call,
+keyPair,
+secret,
+index,
+get,
+put,
+knockout,
+// hyperdown,
+options,
+aes,
+store,
+pub, // statuses
+sub, // statuses watcher
+unsub,
+swapPublisher, // to change ownership of a published item
+upgrade,
+rename,
+list,
+indexOf,
+sign
+```
 
 ## 📜 Licence
 MIT
