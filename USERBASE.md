@@ -1,4 +1,4 @@
-# <img src="https://github.com/benzmuircroft/temp/blob/main/Yjs1.png" height="32" style="vertical-align:40px;" />🍐 @ypear/userbase 😀
+# <img src="https://github.com/benzmuircroft/temp/blob/main/Yjs1.png" height="32" style="vertical-align:40px;"/>🍐 @ypear/userbase 😀
 
 
 ## 💾 Installation
@@ -51,9 +51,10 @@ knockout,
 // hyperdown,
 options,
 aes,
-store, // for cacheDB
+store,
 pub, // statuses
 sub, // statuses watcher
+unsub,
 swapPublisher, // to change ownership of a published item
 upgrade,
 rename,
@@ -64,7 +65,7 @@ sign
 
 ## ✅ Usage
 ```javascript
-const ubExample = async function() {
+const userbaseExample = module.exports = async function() {
   return new Promise(async (resolve) => {
 
     const loading = {
@@ -128,17 +129,22 @@ const ubExample = async function() {
   
   
   
-    async function exampleRecover(d) { // would be sent from the client-side
-      const success = await userbase.recover(d.username, d.secret); // 'fail no profile' | 'fail verifier' | 'success'
+    async function recover(d) { // would be sent from the client-side
+      const recovery = await userbase.recover(d.username, d.secret); // 'fail no profile' | 'fail verifier' | 'success'
+      if(recovery.status == 'success') {
+         delete userbase.register;
+         userbase.login = recovery.login;
+      }
+      return recovery.status;
       // you need to send the succes result back to the client-side
     }
   
   
   
   
-    let exampleRegister;
+    let register;
     if (loading.outcome == 'join') {
-      exampleRegister = async function(d) {
+      register = async function(d) {
         d = {
           referrer: d.referrer,
           username: d.username
@@ -165,7 +171,7 @@ const ubExample = async function() {
   
   
   
-    async function exampleLogin(d) {
+    async function login(d) {
       let login;
       d = {
          username: d.username,
@@ -221,7 +227,7 @@ const ubExample = async function() {
          is.unlocked = async function(str, key, iv) {
             return global.show(str, key || is.aPublicKey(my.self.userbase), iv || my.secret);
          };
-         // the user =======================================================================================================================================
+         // the user:
          my = {
             _id:        login.username,  // string connected to your userbase input
             self:       login.self,      // like my.peer ...
@@ -259,25 +265,27 @@ const ubExample = async function() {
          }
          // ... the user is logged in now (load your app stuff) ...
          console.log({
-          //, store, network
-          my, is
+          //, store,
+          seed: network,
+          my, 
+          is
          }, '... the user is logged in now (load your app stuff) ...');
       }
     }
   
     resolve([
-      userbase,
-      exampleRegister,
-      exampleRecover,
-      exampleLogin
+      register,
+      recover,
+      login
     ]);
   });
 };
+
 ```
-Using the example:
+Using the example (./1/createSeed.js):
 ```javascript
 (async () => {
-  const [ userbase, register, recover, login ] = await ubExample();
+  const [ register, recover, login ] = await require('../userbaseExample')();
 
   if (typeof register == 'function') {
     console.log('new user registering');
@@ -346,118 +354,170 @@ Using the example:
     loading bar: 
     {
       fail: false,
-      secret: '5c4613695592466547117c1d48128745', <<<< yours will be different (save it)
-      pin: '5c4745',                              <<<< yours will be different (save it)
+      secret: '411de272146587654711068e015e2184', <<<< yours will be different (save it)
+      pin: '411184',                              <<<< yours will be different (save it)
       report: 'success'
     }
     */
   }
   else { // on second run of this script we login
     const username = 'seed';
-    const password = '5c4745'; // your pin generated in step one
+    const password = '411184'; // your pin generated in step one
     console.log(await login({ username, password }));
     /*
-      secret: 5c4613695592466547117c1d48128745
-      loading bar: creating corestore ...
-      loading bar: store ready ...
-      loading bar: secure channel setup ...
-      loading bar: getting index ...
-      loading bar: index ready ...
-      loading bar: index updating ...
-      loading bar: store get input ...
-      loading bar: store get output ...
-      loading bar: input ready ...
-      loading bar: output ready ...
-      loading bar: creating autobase ...
-      loading bar: autobase setup ...
-      loading bar: autobase ready ...
-      loading bar: create manager ...
-      loading bar: manager ready ...
-      loading bar: create hyperswarm ...
-      loading bar: joining swarm ...
-      true is synced at start?
-      loading bar: swarm flushing ...
-      loading bar: performing task wait ...
-      loading bar: 
-      userbase done?
-      loading outcome? undefined
-      loading bar: compairing pin to secret ...
-      loading bar: getting profile ...
-      loading bar: knocking out other account instances ...
-      Client errored: DHTError: PEER_NOT_FOUND: Peer not found
-         at findAndConnect (/home/benz/Desktop/vite/hypear/ypear/userbase/node_modules/hyperdht/lib/connect.js:350:74)
-         at async connectAndHolepunch (/home/benz/Desktop/vite/hypear/ypear/userbase/node_modules/hyperdht/lib/connect.js:181:3) {
+    secret: 411de272146587654711068e015e2184
+    loading bar: creating corestore ...
+    loading bar: store ready ...
+    loading bar: secure channel setup ...
+    loading bar: getting index ...
+    loading bar: index ready ...
+    loading bar: index updating ...
+    loading bar: store get input ...
+    loading bar: store get output ...
+    loading bar: input ready ...
+    loading bar: output ready ...
+    loading bar: creating autobase ...
+    loading bar: autobase setup ...
+    loading bar: autobase ready ...
+    loading bar: create manager ...
+    loading bar: manager ready ...
+    loading bar: create hyperswarm ...
+    loading bar: joining swarm ...
+    true is synced at start?
+    loading bar: swarm flushing ...
+    loading bar: performing task wait ...
+    loading bar: 
+    userbase done?
+    loading outcome? undefined
+    loading bar: compairing pin to secret ...
+    loading bar: getting profile ...
+    loading bar: knocking out other account instances ...
+    Client errored: DHTError: PEER_NOT_FOUND: Peer not found
+        at findAndConnect (/home/benz/Desktop/vite/hypear/ypear/userbase/node_modules/hyperdht/lib/connect.js:350:74)
+        at async connectAndHolepunch (/home/benz/Desktop/vite/hypear/ypear/userbase/node_modules/hyperdht/lib/connect.js:181:3) {
       code: 'PEER_NOT_FOUND'
+    }
+    false
+    server listen: cdf11ea847333a04e372387d391f0fd24a51aedbcbbc6d9157125a700e8c9d1d
+    loading bar: creating dht server ...
+    loading bar: dht server ready ...
+    loading bar: dht server listening ...
+    loading bar: 
+    {
+      my: {
+        _id: 'seed',
+        self: {
+          _id: 'seed',
+          spon: 'seed',
+          sig: '48c61f7368ac7422125b4cf572df8e292de87d1dfc20e7d8b60c1cdbc45b0fdb11552d89d90a8ab035984924f15f8f49098dee0ae05a9fad43966790443eb007',
+          userbase: 'eccacefcd4e8212ec00dcf157d6c01e85903aa19426fd490758052283cf970828414db82e4883ed9ab6fe261536450c5f8f54c2e795ad508c6db84b00305fb59d5ac409b302ede0f',
+          phone: 'af42031f30d16baceb905605d46bb0d20ab1aca1e26b38c83a5e2a5c10f57dc96d099b120ad91dff0c68901ee6b26373ee105ad7c05075676f1912af965fdade7784b0f797941b16',
+          trunc1: 'ee9c85f49f84047a0b2b04871445d8bb3cbab9cee16b3ec41b2195e28612c214af99132ae395798aa3342f9e85b3a5618c3c91a8a83e1391bef38329cd41933efcd3ce46b8a728cf',
+          trunc2: '548e61a7a0bb288930b7b4b4e556193237206c439af27f1c6587c3dbedb5289b7db34a5c3143aee1e7f682e960412181a597b67be89158800d8cccdafdb00ab671f86ae260b7a508'
+        },
+        index: { seed: [Object] },
+        secret: '411de272146587654711068e015e2184',
+        list: [AsyncFunction: list],
+        cache: {
+          genesis: 1745678787544,
+          activeOn: 1745678787544,
+          bot: true,
+          refs: [],
+          anything: {},
+          vol: 0.5,
+          sex: 'm',
+          bg: '',
+          base: 'btc'
+        }
+      },
+      is: {
+        call: [AsyncFunction: call],
+        knockout: [AsyncFunction: knockout],
+        aPublicKey: [Function: showPub],
+        options: {
+          networkName: 'myApp-example-123',
+          aes: [Object],
+          entropy: 16,
+          seeSecret: undefined,
+          quit: [Function: quit],
+          loadingLog: [Function: loadingLog],
+          loadingFunction: [Function: loadingFunction],
+          onData: [AsyncFunction: onData],
+          botPrevent: [AsyncFunction: botPrevent],
+          keyPair: [Object],
+          role: 'seed'
+        },
+        peer: [AsyncFunction: peer],
+        got: [AsyncFunction: get],
+        put: [AsyncFunction: put],
+        pub: [AsyncFunction: pub],
+        sub: [AsyncFunction: sub],
+        locked: [AsyncFunction (anonymous)],
+        unlocked: [AsyncFunction (anonymous)],
+        decached: [AsyncFunction (anonymous)]
       }
-      false
-      server listen: fd0bd07fc4fca35ff93aa607cd7f2d11e7e824bf0f0033cc3bbe9600037a28de
-      loading bar: creating dht server ...
-      loading bar: dht server ready ...
-      loading bar: dht server listening ...
-      loading bar: 
-      {
-         my: {
-            _id: 'seed',
-            self: {
-               _id: 'seed',
-               spon: 'seed',
-               sig: 'd0a8378760cf4c2814e7e95d9c5546c39679c1593b98680d314dd9d6969837e4db2a81e47f42a25ff3e2fe6a35a453d87d40eb7fec8ff85d046d805f9a22150b',
-               userbase: '629683e2b7c3bdd8aaf6783a237cc22566775fa2719eef4fea8fc791560af74b508e08238b2c4b08bd8232e7ae6a52bf2f57638ff3d8b3115be6e5848243be0f7b2afa91c994f4eb',
-               phone: '96ca171e9aebb6bcb519a1b61910079cd99671296c175ae5077cce97bbc75f58dba621f16bd96c1a4672360cfed4de75783036e2dcd82c3ee1de7fc64df4eabc0b19fa1c64f29f79',
-               trunc1: '4918d7a1704d4c6c3d298cc269ba3bb41bc379cdaf450ff5c10832d3cf36f081c65553fe27beb6d7f2aa5a812cf8b31b63c4bcc1188616f8ef9a5a97e1896ccbb9919d0e6bd0c2aa',
-               trunc2: 'cdac68de5d29f9905784aa7870d15ee55d52352cef082bce192ae574cd103cde1e0fa18f0cdd7f03d3059709d381036647b8f4c06e8cc9d4a7047d11661c13d1fbd4b62c3b09fa26'
-            },
-            index: { seed: [Object] },
-            secret: '5c4613695592466547117c1d48128745',
-            list: [AsyncFunction: list],
-            cache: {
-               genesis: 1745668058479,
-               activeOn: 1745668237995,
-               bot: true,
-               refs: [],
-               anything: {},
-               vol: 0.5,
-               sex: 'm',
-               bg: '',
-               base: 'btc'
-            }
-         },
-         is: {
-            call: [AsyncFunction: call],
-            knockout: [AsyncFunction: knockout],
-            aPublicKey: [Function: showPub],
-            options: {
-               folderName: './db/userbase',
-               aes: [Object],
-               entropy: 16,
-               seeSecret: undefined,
-               quit: [Function: quit],
-               loadingLog: [Function: loadingLog],
-               loadingFunction: [Function: loadingFunction],
-               onData: [AsyncFunction: onData],
-               botPrevent: [AsyncFunction: botPrevent],
-               keyPair: [Object],
-               role: 'seed'
-            },
-            peer: [AsyncFunction: peer],
-            got: [AsyncFunction: get],
-            put: [AsyncFunction: put],
-            pub: [AsyncFunction: pub],
-            sub: [AsyncFunction: sub],
-            locked: [AsyncFunction (anonymous)],
-            unlocked: [AsyncFunction (anonymous)],
-            decached: [AsyncFunction (anonymous)]
-         }
-      }
-      ... the user is logged in now (load your app stuff) ...
+    } ... the user is logged in now (load your app stuff) ...
     */
   }
 
+})();
+```
+Now keep the above code running and copy it as ./2/creatUser.js:
+```javascript
+(async () => {
+  const [ register, recover, login ] = await require('../userbaseExample')();
+  const fs = require('fs').promises;
+  const process = require('process');
 
 
+  /**
+   * Note: you need to load this script 4 times (the seed should still be running in another terminal)
+   * 
+   * 1. with recovery false and alices seed and pins blank (as she's a new user) she will be registered!
+   * 2. with recovery false and alices seed and pins updated with the details provided in step 1 because she will login!
+   * 3. with recovery true because she is going to loose her device (her ./db folder will be deleted)
+   * 4. with recovery true because shes going to recover her account from the seed and then she will login!
+   */
+
+  let recovery = false;
+  let exists;
+
+  try {
+    await fs.access('./db'); // before step 1 and after step 3 this will be missing but then recreated on step 4   
+    exists = true;
+  }
+  catch (e) {
+    exists = false;
+  }
+
+  if (typeof register == 'function' && !recovery) {                         // 1
+    console.log('new user registering');
+    console.log(await register({ referrer: 'seed', username: 'alice' }));
+  }
+  else if (recovery && exists) {                                            // 3
+    await fs.rm('./db', { recursive: true, force: true });
+    console.log('On no! I threw my device in a lake!');
+    process.exit(0);
+  }
+  else if (recovery) {                                                      // 4
+    const username = 'alice';
+    const secret = 'f9d24a98256168654715ab1c33674495';
+    recovery = await recover({ username, secret });
+    setTimeout(async () => {
+      const username = 'alice';
+      const password = 'f9d495'; // your pin generated in step one
+      console.log(await login({ username, password }));
+    }, 1000);
+  }
+  else {                                                                    // 2
+    const username = 'alice';
+    const password = 'f9d495'; // your pin generated in step one
+    console.log(await login({ username, password }));
+  }
 
 })();
 ```
+
 ## ⚠️ Misusage
 todo.
 
@@ -467,6 +527,8 @@ todo.
 - The `router` will automatically replicate the `userbase`'s `corestore`
 
 - The first user added to a new network must register with `referrer: 'seed', username: 'seed'`, the second must have `referrer: 'seed'`, afterwhich users may start using existing users as thier referrer
+
+- The first user can have a preset `options.seed` if you want
 
 - When testing, please remember to have at least the seed or another user online when creating a new user, otherwise the new user will not see the network
 
