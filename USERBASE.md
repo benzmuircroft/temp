@@ -561,4 +561,6 @@ MIT
 - take away the DHT call beacuse the router has that and it will speed up loading by 50%
 
 - transfur ko to the router for security
+
+- get the loading bar to end at 100%
  
