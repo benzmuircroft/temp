@@ -464,6 +464,11 @@ Now keep the above code running and copy it as ./ub2/createUser.js:
     console.log('new user registering');
     console.log(await register({ referrer: 'seed', username: 'alice' }));
   }
+  else if typeof login == 'function' && !recovery() {                       // 2
+    const username = 'alice';
+    const password = 'f9d495'; // your pin generated in step one
+    console.log(await login({ username, password }));
+  }
   else if (recovery && exists) {                                            // 3
     await fs.rm('./db', { recursive: true, force: true });
     console.log('On no! I threw my device in a lake!');
@@ -479,10 +484,8 @@ Now keep the above code running and copy it as ./ub2/createUser.js:
       console.log(await login({ username, password }));
     }, 1000);
   }
-  else {                                                                    // 2
-    const username = 'alice';
-    const password = 'f9d495'; // your pin generated in step one
-    console.log(await login({ username, password }));
+  else {                                                                    // you did something wrong in the setup script
+    throw new Error('nothing to do.');
   }
 
 })();
