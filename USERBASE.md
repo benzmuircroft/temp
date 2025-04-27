@@ -145,7 +145,7 @@ const userbaseExample = module.exports = async function() {
       let login;
       d = {
          username: d.username,
-         password: d.password
+         pin: d.pin
       };
       loading.steps = 4;
       loading.stage = 0;
@@ -168,7 +168,7 @@ const userbaseExample = module.exports = async function() {
             throw new Error(`thisScriptName.js onCall has no method ${d[0]}`);
          }
       };
-      [login, router] = await userbase.login(d.password, d.username, onCall);
+      [login, router] = await userbase.login(d.pin, d.username, onCall);
       if (login.success != 'success') {
          // reply to client-side { fail: true, report: login.success }
          console.trace({ fail: true, report: login.success });
@@ -332,8 +332,8 @@ Using the example (./ub1/createSeed.js):
   }
   else { // on second run of this script we login
     const username = 'seed';
-    const password = '411184'; // your pin generated in step one
-    console.log(await login({ username, password }));
+    const pin = '411184'; // your pin generated in step one
+    console.log(await login({ username, pin }));
     /*
     secret: 411de272146587654711068e015e2184
     loading bar: creating corestore ...
@@ -467,8 +467,8 @@ Now keep the above code running and copy it as ./ub2/createUser.js:
   }
   else if (typeof login == 'function' && !recovery()) {                     // 2
     const username = 'alice';
-    const password = 'f9d495'; // your pin generated in step one
-    console.log(await login({ username, password }));
+    const pin = 'f9d495'; // your pin generated in step one
+    console.log(await login({ username, pin }));
   }
   else if (recovery && exists) {                                            // 3
     await fs.rm('./db', { recursive: true, force: true });
@@ -481,8 +481,8 @@ Now keep the above code running and copy it as ./ub2/createUser.js:
     recovery = await recover({ username, secret });
     setTimeout(async () => {
       const username = 'alice';
-      const password = 'f9d495'; // your pin generated in step one
-      console.log(await login({ username, password }));
+      const pin = 'f9d495'; // your pin generated in step one
+      console.log(await login({ username, pin }));
     }, 1000);
   }
   else {                                                                    // derp!
@@ -553,8 +553,6 @@ MIT
 # todo:
 
 - let put use pub and take away onData
-
-- change mentions of password to pin
 
 - reduce the api with a proxy
 
