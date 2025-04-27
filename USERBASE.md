@@ -20,6 +20,10 @@ An autobase converted into a invite only registration, login and recovery system
 
 - The first user can have a preset `options.seed` if you want
 
+- `seed` and `secret` are both interchangable names (the users will know it as `seed`, but interally in holepunch it is referred to as a `seed` in thier code)
+
+- A users `pin` in the first three and last three digets of the user's `secret`
+
 - When testing, please remember to have at least the seed or another user online when creating a new user, otherwise the new user will not see the network
 
 - `is.put`/`is.got` are for updating your profile and `is.pub`/`is.sub` is for data that is not in your profile but will be indexed by your profile so that other users can find it 
