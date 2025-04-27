@@ -18,7 +18,7 @@ An autobase converted into a invite only registration, login and recovery system
 
 - The first user added to a new network must register with `referrer: 'seed', username: 'seed'`, the second must have `referrer: 'seed'`, afterwhich users may start using existing users as thier referrer
 
-- The first user can have a preset `options.seed` if you want (You generally want to build a custom app to the seedUser to moderate the network!)
+- The first user can have a preset `options.seed` if you want. (It's best practise to build a custom app to the seedUser to moderate the network!)
 
 - `seed` and `secret` are both interchangable names (the users will know it as `seed`, but interally in holepunch it is referred to as a `seed` in thier code)
 
