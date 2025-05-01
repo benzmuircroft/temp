@@ -18,7 +18,7 @@ An autobase converted into a invite only registration, login and recovery system
 
 - The first user added to a new network must register with `referrer: 'seed', username: 'seed'`, the second must have `referrer: 'seed'`, afterwhich users may start using existing users as thier referrer
 
-- The first user can have a preset `options.seed` if you want. (It's best practise to build a custom app to the seedUser to moderate the network!)
+- The first user can have a preset `options.seed` if you want
 
 - `seed` and `secret` are both interchangable names (the users will know it as `seed`, but interally in holepunch it is referred to as a `seed` in thier code)
 
@@ -35,6 +35,7 @@ An autobase converted into a invite only registration, login and recovery system
 To test userbase and get used to the concept we are going to simulate multiple users on seperate devices
 
 This test will be in this folder structure:
+
 ![image](https://github.com/user-attachments/assets/ae401844-9814-484f-9528-cea89f305159)
 
 ```javascript
@@ -158,21 +159,7 @@ const userbaseExample = module.exports = async function() {
          loading.stage ++;
          // send to client-side { n: (loading.stage * 100) / loading.steps, outcome: loading.outcome, done };
       };
-      const onCall = async function(soc, d) { // todo: probably (soc, keys, d) instead
-         const reply = function (d) {
-         soc.write(b4a.from(JSON.stringify(d)));
-         };
-         const remoteUserbasePublicKey = soc.remotePublicKey.toString('hex');
-         if (is?.allowedMethods.includes(d[0])) { // todo: add some methods note reply just resolves for the one asking
-            // is.serviceCalledYou should be setup by you later (use imagination)
-            if (is?.serviceCalledYou) await is.serviceCalledYou(reply, remoteUserbasePublicKey, d[0], d[1]); // private 1-1 connect address for service-users to all talk to this user
-            else reply('not ready'); // could be better
-         }
-         else {
-            throw new Error(`thisScriptName.js onCall has no method ${d[0]}`);
-         }
-      };
-      [login, router] = await userbase.login(d.pin, d.username, onCall);
+      [login, router] = await userbase.login(d.pin, d.username);
       if (login.success != 'success') {
          // reply to client-side { fail: true, report: login.success }
          console.trace({ fail: true, report: login.success });
@@ -183,8 +170,6 @@ const userbaseExample = module.exports = async function() {
          global.show = login.aes.de;    // local decryption
          // methods for the user's utilization
          is = {
-            call:         login.call,      // is.call('method', remoteUserbasePublicKey, {});
-            knockout:     login.knockout,  // await is.knockout(publicKey)
             aPublicKey:   login.showPub,   // enforce the correct publicKey decrypted length as to not make mistakes
             // hyperdown:    login.hyperdown, // keyPair for events
             options:      login.options,
@@ -385,7 +370,7 @@ Using the example (./ub1/createSeed.js):
           spon: 'seed',
           sig: '48c61f7368ac7422125b4cf572df8e292de87d1dfc20e7d8b60c1cdbc45b0fdb11552d89d90a8ab035984924f15f8f49098dee0ae05a9fad43966790443eb007',
           userbase: 'eccacefcd4e8212ec00dcf157d6c01e85903aa19426fd490758052283cf970828414db82e4883ed9ab6fe261536450c5f8f54c2e795ad508c6db84b00305fb59d5ac409b302ede0f',
-          phone: 'af42031f30d16baceb905605d46bb0d20ab1aca1e26b38c83a5e2a5c10f57dc96d099b120ad91dff0c68901ee6b26373ee105ad7c05075676f1912af965fdade7784b0f797941b16',
+          ix: 'af42031f30d16baceb905605d46bb0d20ab1aca1e26b38c83a5e2a5c10f57dc96d099b120ad91dff0c68901ee6b26373ee105ad7c05075676f1912af965fdade7784b0f797941b16',
           trunc1: 'ee9c85f49f84047a0b2b04871445d8bb3cbab9cee16b3ec41b2195e28612c214af99132ae395798aa3342f9e85b3a5618c3c91a8a83e1391bef38329cd41933efcd3ce46b8a728cf',
           trunc2: '548e61a7a0bb288930b7b4b4e556193237206c439af27f1c6587c3dbedb5289b7db34a5c3143aee1e7f682e960412181a597b67be89158800d8cccdafdb00ab671f86ae260b7a508'
         },
@@ -405,8 +390,6 @@ Using the example (./ub1/createSeed.js):
         }
       },
       is: {
-        call: [AsyncFunction: call],
-        knockout: [AsyncFunction: knockout],
         aPublicKey: [Function: showPub],
         options: {
           networkName: 'myApp-example-123',
@@ -528,13 +511,11 @@ success: 'success',
 self: profile,
 peer,
 showPub,
-call,
 keyPair,
 secret,
 index,
 get,
 put,
-knockout,
 // hyperdown,
 options,
 aes,
@@ -559,10 +540,6 @@ MIT
 - let put use pub and take away onData
 
 - reduce the api with a proxy
-
-- take away the DHT call beacuse the router has that and it will speed up loading by 50%
-
-- transfur ko to the router for security
 
 - get the loading bar to end at 100%
  
