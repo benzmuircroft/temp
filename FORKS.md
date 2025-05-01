@@ -1,6 +1,6 @@
 # <img src="https://github.com/benzmuircroft/temp/blob/main/Yjs1.png" height="32" style="vertical-align:40px;"/>🍐@ypear/forks 🚧
 
-## 💾 Installation
+### 💾 Installation
 
 ```bash
 npm install @ypear/forks
@@ -9,12 +9,11 @@ npm install @ypear/forks
 
 Local forks of Holepunch and related modules needed by userbase
 
-## 🧰 Modules
+### 🧰 Modules
 
 - `autobase`: Local fork of Holepunch's Autobase
 - `@lejeunerenard/autobase-manager`: Fork of autobase-manager
 - `hyperbee`: Fork with CAS prev-null support
 
-## 📜 License
-
+### 📜 License
 MIT
