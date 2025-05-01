@@ -1,145 +1,96 @@
-# @ypear/database
+# <img src="https://github.com/benzmuircroft/temp/blob/main/Yjs1.png" height="32" style="vertical-align:40px;"/>🍐@ypear/database 🗃️
 
-A robust CRDT-based database with LevelDB persistence, built on `@ypear/crdt`, featuring peer-to-peer synchronization and transactional operations.
 
-## Key Features
-- **Conflict-free Replicated Data Types (CRDT)** for automatic conflict resolution
-- **LevelDB persistence** by default
-- **Peer-to-peer synchronization** via `@ypear/router`
-- **Transactional operations** are automatic with full audit trails
-- **Fine-grained access control** with table and item-level rules
-- **Time-based locking** for concurrent operations
-- **Temporary networks** for bug protection
-- **Atomic operations** with rollback capabilities
-- **Built-in protection rules** for data integrity
-
-## Installation
+### 💾 Installation
 ```bash
 npm install @ypear/database
 ```
 
-## Initialization
+### 👀 Description
+A robust CRDT-based database with LevelDB persistence, built on `@ypear/crdt`, featuring peer-to-peer synchronization and transactional operations.
+
+### 🤯 Gotchas:
+
+- If an error is caught externally or internally it is automatically logged to BUGS directory
+
+- BUGS Include original error, call stack, and operation audit trail and a automatic rollback of failed operations
+
+- Set `GUB.LOG_LEVEL = 1` for debug output and 2 to log the whole report at the end
+
+- Temporary networks (`temp`) are automatically cleaned up
+
+- It uses conflict-free replicated data types (CRDT) for automatic conflict resolution
+
+- All changes are batched automatically into one transaction on success
+
+
+## ✅ Usage
 ```javascript
-const { db, GUB, EMPTY } = await require('@ypear/database')(router, {
-  topic: 'your-topic',
-  rules: {
-    'tableName': { // Table with rules
-      owner: 'publicKey', // Only this user may delete items
-      'protectedItem': { 
-        negAlow: true,  // Disallow negative values
-        owner: 'publicKey' // Item owner
-      }
-    },
-    'anotherTable': {} // Table with no rules
-  }
-});
+(async function() {
+  
+  const table = 'btc';
+  const key = 'balance';
+  
+  const peers = {};
+
+  const router = await require('./router.js')(peers, {
+    seed: '1879fa235f0b0c9125822fe76e78c7e4',
+    username: 'benz'
+  });
+
+  const { db, GUB } = await require('./database')(router, {
+    topic: 'test',
+    rules: {
+      'rewards': { // Table with rules
+        owner: 'publicKey', // table owner can delete items
+        'benz': { negAlow: true, owner: 'publicKey' } }, // key owner overrides table owner
+      'btc': {}, // Table with no rules
+      'doge': {}, // Table with no rules
+      'sol': {}, // Table with no rules
+    }
+  });
+
+  let BUG = GUB.NEW('temp', {}, new Error().stack, { caller: 'testing database' });
+  BUG.EXEC = async function (BUG) {
+    try {
+      
+      db.mod(BUG, table, key, [], {is: 'new', 'a': { 'b': true, 'c': '0'}}, 'creating it from scratch');
+      await db.can(BUG, t, k, note, async function(BUG) { // wait only for things that already exist
+        console.log(db[BUG.NET][table][key]);
+        db.cut(BUG, t, k, ['a', 'b'], 'removing nested item b');
+        console.log(db[BUG.NET][t][k]);
+        db.sum(BUG, t, k, ['a', 'bal'], 'add', '174', 'adding a balance of 174');
+        console.log(db[BUG.NET][t][k]);
+        GUB.END(BUG, null, function () {
+          console.log('success');
+          console.log(db['live'][t][k]);
+          });
+      });
+
+    }
+    catch (ERROR) {
+      GUB.END(BUG, ERROR, function (BUG) {
+        console.error(BUG);
+      });
+    }
+  };
+  BUG.EXEC(BUG);
+
+})();
 ```
-
-## Core Concepts
-
-### Transaction Handling 
-All operations require a BUG transaction object:
-```javascript
-let BUG = GUB.NEW('temp', {}, new Error().stack, { 
-  caller: 'transaction-description',
-  hist: true  // todo: Enable history tracking
-});
-
-BUG.EXEC = async function(BUG) {
-  // Database operations here
-  GUB.END(BUG, null, () => console.log('Success'));
-};
-BUG.EXEC(BUG);
-```
-
-### Networks
-- **live**: The authoritative synchronized state
-- **temp**: Temporary network for testing operations
-- **test**: Isolated testing environment
-
-## API Reference
-
-### Database Operations
-- `db.mod(BUG, table, key, path, value, note)` - Modify or create data
+### 🧰 Methods
 - `db.can(BUG, table, key, note, callback)` - Access-controlled context
+- `db.mod(BUG, table, key, path, value, note)` - Modify or create data
 - `db.cut(BUG, table, key, path, note)` - Remove data
 - `db.sum(BUG, table, key, path, op, value, note)` - Numeric operations
 - `db.del(BUG, table, key, note)` - Delete an item
 - `db.isLocked(BUG, table, key)` - Check if item is locked
 - `db.iveLocked(BUG, table, key)` - Check if you have locked an item
-
-### GUB (Global Utility Base)
 - `GUB.NEW(env, args, trace, options)` - Create new transaction
 - `GUB.END(BUG, error, callback)` - Complete transaction
 - `GUB.LOG_LEVEL` - Control logging verbosity (0-2)
 - `GUB.PAINTER` - Track last successful transaction
 
 
-### Table Initialization And Protection Rules
-Define access control when initializing your tables:
-```javascript
-rules: {
-  tableName: {
-    owner: 'publicKey', // Table-level permissions
-    itemName: {         // Item-level permissions
-      negAlow: true,    // Disallow negative values
-      owner: 'publicKey'// Item owner
-    }
-  }
-}
-```
-
-### Peer Configuration
-Requires `@ypear/router` instance:
-```javascript
-const router = await require('@ypear/router')(peers, {
-  seed: 'your-seed',
-  username: 'your-username'
-});
-```
-
-## Error Handling
-- Failed transactions are automatically logged to BUGS directory
-- Includes original error, call stack, and operation audit trail
-- Automatic rollback of failed operations
-
-## Development Notes
-- Set `GUB.LOG_LEVEL = 2` for debug output
-- Temporary networks (`temp`) are automatically cleaned up
-- Use `BUG.TEST_ONLY` flag for development testing
-- All operations are audited in `BUG.AUDIT`
-
-## Example Usage
-```javascript
-const BUG = GUB.NEW('temp', {}, new Error().stack, { caller: 'example' });
-
-BUG.EXEC = async function(BUG) {
-  db.mod(BUG, 'animals', 'donkey', [], { is: 'new' }, 'creating');
-  
-  await db.can(BUG, 'animals', 'donkey', 'modifying', async function(BUG) {
-    db.cut(BUG, 'animals', 'donkey', ['a', 'b'], 'removing field');
-    db.sum(BUG, 'animals', 'donkey', ['a', 'bal'], 'add', '174', 'adding value');
-  });
-  
-  GUB.END(BUG, null, () => console.log('Done'));
-};
-
-BUG.EXEC(BUG);
-```
-
-## License
+## 📜 License
 MIT
-
-## 👀 Description
-
-## 💾 Installation
-
-## 🧰 Methods
-
-## ✅ Usage
-
-## ⚠️ Misusage
-
-## 🤯 Gotchas
-
-## 📜 Licence
