@@ -1,57 +1,20 @@
-# @ypear/forks
+# <img src="https://github.com/benzmuircroft/temp/blob/main/Yjs1.png" height="32" style="vertical-align:40px;"/>🍐@ypear/forks 🚧
+
+## 💾 Installation
+
+```bash
+npm install @ypear/forks
+```
+### 👀 Description
 
 Local forks of Holepunch and related modules needed by userbase
 
-## Included Modules
+## 🧰 Modules
 
 - `autobase`: Local fork of Holepunch's Autobase
 - `@lejeunerenard/autobase-manager`: Fork of autobase-manager
 - `hyperbee`: Fork with CAS prev-null support
 
-## Installation
+## 📜 License
 
-```bash
-npm install @ypear/forks
-```
-
-## Usage
-
-```javascript
-const {
-  autobase,
-  autobaseManager,
-  hyperbee
-} = require('@ypear/forks');
-```
-
-## Why Forked?
-
-These modules contain custom modifications needed for:
-- Offline-first/local-first applications
-- Specialized database operations
-- Compatibility with userbase requirements
-
-## Development
-
-To modify any of the forked modules:
-1. Edit the module in its subdirectory
-2. Run `npm install` to update symlinks
-3. Test changes in your application
-
-## License
-
-MIT © Benz Muircroft
-
-## 👀 Description
-
-## 💾 Installation
-
-## 🧰 Methods
-
-## ✅ Usage
-
-## ⚠️ Misusage
-
-## 🤯 Gotchas
-
-## 📜 Licence
+MIT
