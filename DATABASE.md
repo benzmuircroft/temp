@@ -24,7 +24,7 @@ A robust CRDT-based database with LevelDB persistence, built on `@ypear/crdt`, f
 - All changes are batched automatically into one transaction on success
 
 
-## ✅ Usage
+### ✅ Usage
 ```javascript
 (async function() {
   
@@ -92,5 +92,5 @@ A robust CRDT-based database with LevelDB persistence, built on `@ypear/crdt`, f
 - `GUB.PAINTER` - Track last successful transaction
 
 
-## 📜 License
+### 📜 License
 MIT
