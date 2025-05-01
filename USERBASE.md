@@ -170,14 +170,15 @@ const userbaseExample = module.exports = async function() {
          global.show = login.aes.de;    // local decryption
          // methods for the user's utilization
          is = {
-            aPublicKey:   login.showPub,   // enforce the correct publicKey decrypted length as to not make mistakes
+            aPublicKey:   login.showPub,   // enforce the correct publicKey decrypted length so-as-to not make mistakes
             // hyperdown:    login.hyperdown, // keyPair for events
             options:      login.options,
             peer:         login.peer,      // is.peer(peerid), it finds users userbase imutable profile objects
-            got:          login.get,       // await is.got(key)
+            got:          login.got,       // await is.got(key) or await is.got(username, key)
             put:          login.put,       // await is.put(key, val)
-            pub:          login.pub,
-            sub:          login.sub,
+            pub:          login.pub,       // await is.pub(key, val)
+            sub:          login.sub,       // await is sub(username, key, (update) => {});
+            unsub:        login.unsub      // await is.unsub(username, key);
             // botBounty
          };
          is.locked = async function(str, key, iv) {
