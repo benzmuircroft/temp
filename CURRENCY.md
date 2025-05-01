@@ -1,24 +1,14 @@
-# @ypear/currency.js - String-based Math Operations
+# <img src="https://github.com/benzmuircroft/temp/blob/main/Yjs1.png" height="32" style="vertical-align:40px;"/>🍐@ypear/currency 🧮
 
-A JavaScript utility for performing precise mathematical operations on large numbers represented as strings, with comprehensive support for cryptocurrency-style decimal conversions (8/16 decimal places).
-
-## Features
-- String-based arithmetic operations (add, subtract, multiply, divide)
-- Conversion between different decimal place representations:
-  - 8 decimal places (satoshis)
-  - 16 decimal places (qsats)
-  - Standard decimal notation
-- Precise calculations without floating-point rounding errors
-- Support for very large numbers via bigInt
-- Formatted output with subscript digits for readability
-- Percentage/share calculations
-
-## Installation
+### 💾 Installation
 ```bash
 npm install @ypear/currency
 ```
 
-## Core Functions
+## 👀 Description
+A JavaScript utility for performing precise mathematical operations on large numbers represented as strings, with comprehensive support for cryptocurrency-style decimal conversions (8/16 decimal places).
+
+### ✅ Usage
 ```javascript
 const cc = require('@ypear/currency');
 
@@ -37,32 +27,12 @@ cc.qsat_to_readable('10000000000000000'); // Returns formatted string with subsc
 cc.fixed('1.23456789', 4); // Returns '1.2345'
 ```
 
-## Advanced Functions
+### 🧰 Example Methods
 - `calc_share(my_balance, total, new_reward)` - Calculate proportional share
 - `pct_to_share(percent, of_number)` - Convert percentage to share
 - `share_to_pct(balance, total)` - Convert share to percentage
 - `no_e(x)` - Convert scientific notation to fixed string
 
-## Error Handling
-All functions:
-- Handle undefined inputs by defaulting to "0"
-- Preserve negative signs
-- Remove quotes and other non-numeric characters
-- Pad with leading zeros when needed
 
-## License
+### 📜 License
 MIT
-
-## 👀 Description
-
-## 💾 Installation
-
-## 🧰 Methods
-
-## ✅ Usage
-
-## ⚠️ Misusage
-
-## 🤯 Gotchas
-
-## 📜 Licence
