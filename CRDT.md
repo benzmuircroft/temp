@@ -1,22 +1,31 @@
-# @ypear/crdt.js - Distributed CRDT over Hyperswarm
+# <img src="https://github.com/benzmuircroft/temp/blob/main/Yjs1.png" height="32" style="vertical-align:40px;"/>🍐@ypear/crdt.js 📑
 
-A Conflict-Free Replicated Data Type (CRDT) implementation using Yjs with Hyperswarm networking and optional LevelDB persistence.
+### 💾 Installation
 
-## Features
-
-- **Distributed synchronization** via Hyperswarm network
-- **CRDT operations** powered by Yjs
-- **Optional persistence** using LevelDB
-- **Map & Array support** with automatic conflict resolution
-- **Batch operations** for atomic transactions
-- **Efficient delta updates** with state vector tracking
-
-## Installation
 ```bash
 npm install @ypear/crdt
 ```
 
-## Basic Usage
+### 👀 Description
+
+A Conflict-Free Replicated Data Type (CRDT) implementation using Yjs with Hyperswarm networking and optional LevelDB persistence.
+
+### 🤯 Gotchas:
+
+- Distributed synchronization via Hyperswarm network
+
+- Optional persistence using LevelDB
+
+- Map, Array and Array nested in Maps support with automatic conflict resolution
+
+- Efficient delta updates with state vector tracking
+
+- `options.observerFunction` allows you to receive real-time updates
+
+- Access current state directly via `crdt.c` (cache) property
+
+
+### ✅ Usage
 ```javascript
 (async () => {
   const router = await require('@ypear/router')(peers, {
@@ -65,9 +74,8 @@ npm install @ypear/crdt
 })();
 ```
 
-## API Reference
 
-### Core Methods
+### 🧰 Methods
 
 - `map(name)`: Creates/gets a CRDT map
 - `set(mapName, key, value)`: Sets a value in a map
@@ -79,40 +87,6 @@ npm install @ypear/crdt
 - `cut(arrayName, index, length)`: Removes from an array
 - `execBatch(operations)`: Executes batched operations atomically
 
-### Advanced Features
 
-- **Observer Function**: Receive real-time updates via `options.observerFunction`
-- **Direct Access**: Access current state via `crdt.c` property
-- **Network Control**: Manual propagation via `crdt.propagate()`
-
-## Persistence
-
-When LevelDB persistence is enabled:
-- All operations are stored in LevelDB
-- State vectors track update history
-- Documents reconstruct from persisted data on restart
-
-## Network Synchronization
-
-The CRDT automatically:
-- Propagates updates to all peers
-- Merges incoming updates
-- Resolves conflicts using Yjs algorithms
-- Maintains eventual consistency
-
-## License
+## 📜 License
 MIT
-
-## 👀 Description
-
-## 💾 Installation
-
-## 🧰 Methods
-
-## ✅ Usage
-
-## ⚠️ Misusage
-
-## 🤯 Gotchas
-
-## 📜 Licence
