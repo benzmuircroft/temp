@@ -10,6 +10,13 @@ npm install @ypear/router
 A router runs a single Hyperswarm. It routes topics. It is modular and can support a single @ypear/userbase, multiple @ypear/database's and multiple @ypear/crdt's. This is faster and leaner than creating a new Hyperswarm in each module! Altimatly, it leads to a better user experence!
 
 ### 🤯 Gotchas
+
+- The `router` must have `options.networkName` which must be a long unique string, so as to not clash with other networks
+
+- Never show your network name
+
+- Topics run on top of network
+
 - The `userbase` takes a `router` that has not been `started`
 
 - If the `router` has a `userbase`; the `router` will replicate the `userbase`'s `corestore`
@@ -39,7 +46,7 @@ See usage with @ypear/userbase instead.
     username: 'bob' // make up a name or got on userbase.login
   });
   
-  await router.start(topic);
+  await router.start(); // join options.networkName
   
   const [
     propagate, // wait till everyone propagates to everyone and replys done 
