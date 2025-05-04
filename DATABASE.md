@@ -48,6 +48,10 @@ A robust CRDT-based database with LevelDB persistence, built on `@ypear/crdt`, f
       'btc': {}, // Table with no rules
       'doge': {}, // Table with no rules
       'sol': {}, // Table with no rules
+    },
+    events: {
+      forWho: (ev) => {}, // function for you to figure out who the event is for
+      display: async (evArray) => {} // function for you to send the events to the client side
     }
   });
 
