@@ -42,6 +42,7 @@ See usage with @ypear/userbase instead.
   const topic = 'test123';
   // Initialize without userbase
   const router = await require('@ypear/router')({}, {
+    networkName: 'very-unique-4898n0aev7e7egigtr',
     seed: 'a788bbf9fe2a420ad2703cabc9efc9e1', // hex 32. unpacks to a determinilistic keyPair (you can get this after userbase.login)
     username: 'bob' // make up a name or got on userbase.login
   });
