@@ -34,6 +34,7 @@ A robust CRDT-based database with LevelDB persistence, built on `@ypear/crdt`, f
   const peers = {};
 
   const router = await require('./router.js')(peers, {
+    networkName: 'very-unique-4898n0aev7e7egigtr',
     seed: '1879fa235f0b0c9125822fe76e78c7e4',
     username: 'benz'
   });
