@@ -29,6 +29,7 @@ A Conflict-Free Replicated Data Type (CRDT) implementation using Yjs with Hypers
 ```javascript
 (async () => {
   const router = await require('@ypear/router')(peers, {
+    networkName: 'very-unique-4898n0aev7e7egigtr',
     seed: '76e78c7efa235f018799125822feb0c4', // example only 32 hex (generate a different one)
     username: 'alice' // example only username
   });
