@@ -1,4 +1,4 @@
-# <img src="https://github.com/benzmuircroft/temp/blob/main/Yjs.png" height="32" style="vertical-align:40px;"/>🍐 @ypear/userbase 😀
+# <img src="https://github.com/benzmuircroft/temp/blob/main/Yjs.png" height="32" style="vertical-align:40px;"/>🍐@ypear/userbase 😀
 
 
 ## 💾 Installation
@@ -62,7 +62,7 @@ const userbaseExample = module.exports = async function() {
    let seeSecret = false; // should be true but we have no ui here
 
    const options = {
-      networkName: 'myApp-example-123', // pick a unique name
+      networkName: 'very-unique-4898n0aev7e7egigtr', // pick a unique name
       aes: { // choose your own aes key and iv for your app
          key: '581cecab27fc7724a871f9a5dc26030db03b6d9d850058c7b106497544415989', // keep same for all users!
          iv: '143cc663df5fb41611e0e4365b3c0e45', // keep same for all users!
