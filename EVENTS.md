@@ -49,7 +49,7 @@ User events that work even if the user is offline.
 
   const router2 = await require('@ypear/router.js')({}, {
     networkName: 'very-unique-4898n0aev7e7egigtr',
-    seed: 'a788bbf9fe2a420ad270fcabc9efc9e1',
+    seed: '270fcabc9efc9e1a788bbf9fe2a420ad',
     username: 'daniel'
   });
 
